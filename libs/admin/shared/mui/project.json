@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/admin/shared/mui",
+  "sourceRoot": "libs/admin/shared/mui/src",
+  "prefix": "nx-scalio-app",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/admin/shared/mui"],
+      "options": {
+        "project": "libs/admin/shared/mui/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/admin/shared/mui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/admin/shared/mui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/admin/shared/mui"],
+      "options": {
+        "jestConfig": "libs/admin/shared/mui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/admin/shared/mui/src/**/*.ts",
+          "libs/admin/shared/mui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

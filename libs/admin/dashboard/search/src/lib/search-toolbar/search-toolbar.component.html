@@ -1,0 +1,87 @@
+
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav-container>
+      <mat-toolbar color="primary">
+        <mat-icon aria-hidden="false" 
+            aria-label="Example home icon"
+            (click)="reloadpage()"
+            >home</mat-icon>
+
+        <span class="title">Scalio Search Application Demo</span>
+        <div class="wrap">
+            <div class="search">
+               <input type="text" #inputRef 
+                      class="searchTerm" 
+                      (keydown.enter)="handleSearch(inputRef.value)"
+                      placeholder="What are you looking for?">
+               <button type="submit" class="searchButton" (click)="handleSearch(inputRef.value)">
+                 <mat-icon 
+                        aria-hidden="false" 
+                        aria-label="Example home icon"
+                    >search</mat-icon>
+              </button>
+            </div>
+        </div>
+      </mat-toolbar>
+    </mat-sidenav-container>
+  </mat-sidenav-container>
+<div class="loading-indicator" *ngIf="(isLoading$ | async)">
+    <mat-spinner mode="indeterminate" color="accent"></mat-spinner>
+</div>
+<ng-container *ngIf="(userData$ | async )">
+  <table style="width: 100%;" 
+    mat-table
+    matSort
+    matSortActive="login" 
+    matSortDirection="asc" 
+    matSortDisableClear
+    (matSortChange)="sortData($event)"
+    [dataSource]="dataSource" 
+    class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" style="text-align: center; font-weight: bold;" [attr.colspan]="displayedColumns.length">
+            No Data Found.
+        </td>
+    </tr>
+
+    <!-- <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> Num. </th>
+        <td mat-cell *matCellDef="let element; let index = index">{{index + 1}}</td>
+    </ng-container> -->
+    
+    <!-- Avatar Column -->
+    <ng-container matColumnDef="avatar_url">
+      <th mat-header-cell *matHeaderCellDef > Avatar </th>
+      <td mat-cell *matCellDef="let element">
+        <img [src]='element.avatar_url' height="100px" width="100px"/>
+      </td>
+    </ng-container>
+  
+    <!-- Login Name Column -->
+    <ng-container matColumnDef="login">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Login </th>
+      <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+    </ng-container>
+  
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator 
+        [hidden]="!dataSource.data.length" 
+        [length]="TOTAL"
+        [pageSize]="PAGE_SIZE"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)"
+        aria-label="Select page">
+    </mat-paginator>    
+</ng-container>
