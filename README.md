@@ -1,105 +1,60 @@
 
 
-# NxScalioApp
-
+# Web - Angular Test Assignment - NxScalioApp
 This project was generated using [Nx](https://nx.dev).
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+## Demo Link: https://nx-search-app.netlify.app/
 
-🔎 **Smart, Fast and Extensible Build System**
+## Overview
 
-## Quick Start & Documentation
+The goal is to create a simple web application which makes a request to an API, parses the response, and displays the result in the UI. The app will consist of **two major components** - one **search** component and one **results** component.
 
-[Nx Documentation](https://nx.dev/angular)
+## Detail
 
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
+### Search Component
 
-[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
+This component should contain two elements:
 
-## Adding capabilities to your workspace
+- 'Login' Text input for entering a String value
+- 'Submit' Button for initiating a request to 
+`https://api.github.com/search/users?q={login} in:login`, where {login} is the input value
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### Results Component
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+This component should contain a single element:
 
-Below are our core plugins:
+- Results Table for displaying the results of the User search
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+The results table has the following requirements:
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+- Display three columns from the response:
+    - `avatar_url`
+    - `login`
+    - `type`
+- Use [Pagination](https://docs.github.com/en/rest/guides/traversing-with-pagination#basics-of-pagination), with **9** items displayed Per_Page
+- Allow Sorting, with the `login` column being sorted by default
 
-## Generate an application
+## UI
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+The UI should appear modern and simple while following best practices around HTML + CSS/SCSS. Creativity is encouraged, so feel free design the UI in any way you wish. However, the app must be functionally complete. 
 
-> You can use any of the plugins above to generate applications as well.
+## Use-Case
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+- After the app is launched, the **Search** component is displayed
+- The user enters a random String value into to the 'Login' field and clicks the 'Submit' button
+- The app sends a http request to `https://api.github.com/search/users?q={login} in:login`, where {login} is the String value entered by the user
+- The app then parses the response from the server. If data is returned, the **Results** component should display the fetched values. If there is an issue with the request, then an error message should be displayed.
 
-## Generate a library
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@nx-scalio-app/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Development server - Run the application 
+  - `nx run admin:serve:development` or
+  - `npm run start` 
+  - Navigate to http://localhost:4200/.
 
 ## Running unit tests
+  - `nx run admin-dashboard-search:test --codeCoverage`
+  - `nx run admin-shared-mui:test --codeCoverage`
+  
+## Build
 
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-
-
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/apps/admin` directory. Use the `--prod` flag for a production build.
