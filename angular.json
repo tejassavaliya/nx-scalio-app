@@ -5,7 +5,6 @@
     "admin-dashboard-search": "libs/admin/dashboard/search",
     "admin-e2e": "apps/admin-e2e",
     "admin-shared-mui": "libs/admin/shared/mui",
-    "admin-shared-ui": "libs/admin/shared/ui",
     "admin-shared-utility": "libs/admin/shared/utility"
   }
 }

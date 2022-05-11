@@ -14,6 +14,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   imports: [
     
@@ -58,4 +59,5 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ]
 })
 
-export class AdminSharedMuiModule {}
+export class AdminSharedMuiModule {
+}

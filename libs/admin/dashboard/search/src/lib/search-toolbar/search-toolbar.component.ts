@@ -56,7 +56,6 @@ export class SearchToolbarComponent implements OnInit, AfterViewInit, OnDestroy 
 */
   userData$: Observable<User[]> = this.store.pipe(select(userQuery.getUsers));
   searchTermValue = '';
-  
   TOTAL = 0;
   PAGE_SIZE = 9;
   PAGE_INDEX = 1;
@@ -67,20 +66,15 @@ export class SearchToolbarComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(private store: Store<DashboardState>) {}
 
   ngOnInit(): void {
-    console.log("first");
     this.subscribeToSearch();
-   
-    // this.userData$ = this.store.pipe(select(userQuery.getUsers));
   }
   ngAfterViewInit() {
-    // reset the paginator after sorting
       console.log("ngafter view init")
+      this.inputRef.nativeElement.focus();
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
-  reloadpage() {
-    window.location.reload()
-  }
+  
   sortData(sort: Sort) {
      
      const data = this.sortedData.slice();
@@ -112,8 +106,6 @@ export class SearchToolbarComponent implements OnInit, AfterViewInit, OnDestroy 
           this.TOTAL = data.total_count;
           this.sortedData = data.items;
           this.dataSource = new MatTableDataSource(data.items);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort; 
       });
   };
   private initialiseData = (data: Array<User>): void => {
@@ -126,8 +118,6 @@ export class SearchToolbarComponent implements OnInit, AfterViewInit, OnDestroy 
   onPaginateChange(event: { pageIndex: number; pageSize: number; }) {
     this.PAGE_INDEX = event.pageIndex + 1;
     this.PAGE_SIZE = event.pageSize;
-    // this.SORT = this.dataSource?.sort?.direction;
-
     
     this.store.dispatch(search({
       q: this.searchTermValue,
@@ -143,7 +133,6 @@ export class SearchToolbarComponent implements OnInit, AfterViewInit, OnDestroy 
       this.searchTermValue = searchText;
       this.PAGE_INDEX = 1;
       if(this.paginator) {
-        // this.paginator.pageIndex = 0;
         this.paginator.firstPage();
       }
       this.store.dispatch(search({

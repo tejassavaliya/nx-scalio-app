@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromDashboard from './+state/dashboard.reducer';
 import { DashboardEffects } from './+state/dashboard.effects';
+import { DashboardService } from './services/dashboard.service';
 
 export const adminDashboardRoutes: Route[] = [
   {
@@ -27,6 +28,9 @@ export const adminDashboardRoutes: Route[] = [
       fromDashboard.dashboardReducer
     ),
     EffectsModule.forFeature([DashboardEffects]),
+  ],
+  providers: [
+    DashboardService
   ],
   declarations: [SearchToolbarComponent],
 })

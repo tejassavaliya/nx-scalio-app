@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Observable } from 'rxjs';
 import { UserResponse } from '../+state/dashboard.models';
@@ -8,9 +9,9 @@ import { UserResponse } from '../+state/dashboard.models';
   providedIn: 'root'
 })
 export class DashboardService {
-  // BASE_URL = 'https://api.github.com/search/users?q=test&page=2&per_page=10&sort=dsc';
-  BASE_URL = 'https://api.github.com/search/users';
+  private BASE_URL = 'https://api.github.com/search/users';
   constructor(private httpClient: HttpClient,
+              private _snackBar: MatSnackBar
     ) { }
 
   getUserData = (
@@ -31,5 +32,7 @@ export class DashboardService {
     return this.httpClient.get<UserResponse>(this.BASE_URL, { params: queryParams});
   }
 
-  
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
 }

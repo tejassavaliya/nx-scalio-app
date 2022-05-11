@@ -29,7 +29,6 @@ export class DashboardEffects {
   
   constructor(
     private readonly actions$: Actions, 
-    private readonly dashboardService: DashboardService,
-    private store: Store<DashboardState>,
+    private readonly dashboardService: DashboardService
   ) {}
 }

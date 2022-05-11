@@ -2,19 +2,15 @@ import { Any } from '@scalio/utility';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { NxModule } from '@nrwl/angular';
-import { hot } from 'jasmine-marbles';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 import { DashboardService } from '../services/dashboard.service';
-
-import * as DashboardActions from './dashboard.actions';
 import { DashboardEffects } from './dashboard.effects';
 import { initialDashboardState } from './dashboard.state';
 import * as FromActions from './dashboard.actions';
 
-import { HttpErrorResponse } from '@angular/common/http';
 describe('DashboardEffects', () => {
 
   const initialState = { DASHBOARD_FEATURE_KEY: initialDashboardState };
@@ -88,15 +84,7 @@ describe('DashboardEffects', () => {
       }
     });
 
-    // testScheduler.run(({ hot, expectObservable }) => {
-    //   actions = hot('-a', { a: action }); 
-    //   dashboardHttpService.search$.mockReturnValue(
-    //     of({ code: 200, message: 'OK' })
-    //   );
-    //   expectObservable(effects.search$).toBe('-b', {
-    //     b: outcome,
-    //   });
-    // });
+    
     
   });
 });

@@ -1,33 +1,27 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-// import { Any } from 'libs/admin/shared/utility/src';
-export class Any {
-  static randomString(): string {
-    const radix = 36;
-
-    return (Math.random() + 1).toString(radix).substring(2, 5);
-  }
-
-  static randomInteger(min = 1, max = 100): number {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-}
+import { Any } from '@scalio/utility';
 
 import { DashboardService } from './dashboard.service';
 
 describe('DashboardService', () => {
   let service: DashboardService;
-  
+  let httpMock: HttpTestingController;
 
   const mockDashboardService = {
     getUserData: jest.fn(),
   };
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [{ provide: DashboardService, useValue: mockDashboardService }],
     });
     service = TestBed.inject(DashboardService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
-
+  afterEach(() => {
+    httpMock.verify();
+  });
   it('should be created', () => {
     expect(service).toBeTruthy();
   });

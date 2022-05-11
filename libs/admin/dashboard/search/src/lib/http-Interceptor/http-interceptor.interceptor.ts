@@ -9,9 +9,6 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 
-
-
-
 @Injectable()
 export class HttpAPIInterceptor implements HttpInterceptor {
 
@@ -28,11 +25,13 @@ export class HttpAPIInterceptor implements HttpInterceptor {
                     if (error.error instanceof ErrorEvent) {
                         console.log('This is client side error');
                         errorMsg = `Error: ${error.error.message}`;
+                        alert(errorMsg);
                         // this.openSnackBar(errorMsg, JSON.stringify(error.status))
                         
                     } else {
                         console.log('This is server side error');
                         errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+                        alert(errorMsg);
                         // this.openSnackBar(errorMsg, JSON.stringify(error.status))
                     }
                     console.log(errorMsg);

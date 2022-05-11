@@ -15,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-scalio-app/admin/shared/ui": ["libs/admin/shared/ui/src/index.ts"],
       "@scalio/mui-lib": ["libs/admin/shared/mui/src/index.ts"],
       "@scalio/search-lib": ["libs/admin/dashboard/search/src/index.ts"],
       "@scalio/utility": ["libs/admin/shared/utility/src/index.ts"]
